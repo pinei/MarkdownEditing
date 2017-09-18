@@ -416,11 +416,109 @@
             <key>name</key>
             <string>Markdown: Punctuation</string>
             <key>scope</key>
-            <string>punctuation.definition.metadata.markdown,punctuation.definition.string.begin.markdown, punctuation.definition.string.end.markdown, punctuation.definition.constant.markdown, punctuation.separator.key-value.markdown, punctuation.definition.constant.begin.markdown, punctuation.definition.constant.end.markdown,punctuation.definition.bold.markdown, punctuation.definition.italic.markdown, punctuation.definition.strikethrough.markdown, punctuation.definition.heading.markdown</string>
+            <string>punctuation.definition.metadata.markdown,punctuation.definition.string.begin.markdown, punctuation.definition.string.end.markdown, punctuation.definition.constant.markdown, punctuation.separator.key-value.markdown, punctuation.definition.constant.begin.markdown, punctuation.definition.constant.end.markdown,punctuation.definition.bold.markdown, punctuation.definition.italic.markdown, punctuation.definition.strikethrough.markdown</string>
             <key>settings</key>
             <dict>
                 <key>foreground</key>
-                <string>#555555</string>
+                <string>#cc5555</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#cc55cc</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 1 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_1.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ffff00</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 2 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_2.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ffd000</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 3 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_3.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ffb000</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 4 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_4.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ffa000</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 5 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_5.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ff9000</string>
+                <key>background</key>
+                <string>#11111100</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Markdown: Heading 6 Punctuation</string>
+            <key>scope</key>
+            <string>punctuation.definition.heading_6.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#ff8000</string>
                 <key>background</key>
                 <string>#11111100</string>
             </dict>
@@ -897,6 +995,33 @@
                 <string>#565656</string>
             </dict>
         </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Table Bar</string>
+            <key>scope</key>
+            <string>punctuation.separator.table-bar.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#00FF80</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Arrows</string>
+            <key>scope</key>
+            <string>punctuation.separator.map-arrow.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#00FF80</string>
+            </dict>
+        </dict>
+
+
+
     </array>
     <key>uuid</key>
     <string>BF4E1964-0DB9-4E88-8142-E8F52D7EDEEC</string>

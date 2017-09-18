@@ -170,6 +170,12 @@ contexts:
         Markdown will convert this for us. We match it so that the
                         HTML grammar will not mark it up as invalid.
       scope: meta.other.valid-ampersand.markdown
+  table-bar:
+    - match: '([|])'
+      scope: punctuation.separator.table-bar.markdown
+  map-arrow:
+    - match: '([→←])'
+      scope: punctuation.separator.map-arrow.markdown 
   block_quote:
     - match: '\G[ ]{,3}(>)[ ]?'
       comment: |
@@ -281,6 +287,8 @@ contexts:
               pop: true
         - include: escape
         - include: ampersand
+        - include: table-bar
+        - include: map-arrow
         - include: bracket
         - include: raw
         - include: bold_italic
@@ -354,6 +362,8 @@ contexts:
               pop: true
         - include: escape
         - include: ampersand
+        - include: table-bar
+        - include: map-arrow
         - include: bracket
         - include: raw
         - include: italic
@@ -648,15 +658,82 @@ contexts:
           pop: true
         - include: scope:source.yaml
   heading:
-    - match: '\G(#{1,6})(?!#)\s*(?=\S)'
+    - include: heading_1
+    - include: heading_2
+    - include: heading_3
+    - include: heading_4
+    - include: heading_5
+    - include: heading_6
+  heading_1:
+    - match: '\G(#{1})(?!#)\s*(?=\S)'
       captures:
-        1: punctuation.definition.heading.markdown
+        1: punctuation.definition.heading_1.markdown
       push:
         - meta_scope: markup.heading.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
-            1: punctuation.definition.heading.markdown
+            1: punctuation.definition.heading_1.markdown
+          pop: true
+        - include: inline
+  heading_2:
+    - match: '\G(#{2})(?!#)\s*(?=\S)'
+      captures:
+        1: punctuation.definition.heading_2.markdown
+      push:
+        - meta_scope: markup.heading.markdown
+        - meta_content_scope: entity.name.section.markdown
+        - match: '[ \t]*(#*)$'
+          captures:
+            1: punctuation.definition.heading_2.markdown
+          pop: true
+        - include: inline
+  heading_3:
+    - match: '\G(#{3})(?!#)\s*(?=\S)'
+      captures:
+        1: punctuation.definition.heading_3.markdown
+      push:
+        - meta_scope: markup.heading.markdown
+        - meta_content_scope: entity.name.section.markdown
+        - match: '[ \t]*(#*)$'
+          captures:
+            1: punctuation.definition.heading_3.markdown
+          pop: true
+        - include: inline
+  heading_4:
+    - match: '\G(#{4})(?!#)\s*(?=\S)'
+      captures:
+        1: punctuation.definition.heading_4.markdown
+      push:
+        - meta_scope: markup.heading.markdown
+        - meta_content_scope: entity.name.section.markdown
+        - match: '[ \t]*(#*)$'
+          captures:
+            1: punctuation.definition.heading_4.markdown
+          pop: true
+        - include: inline
+  heading_5:
+    - match: '\G(#{5})(?!#)\s*(?=\S)'
+      captures:
+        1: punctuation.definition.heading_5.markdown
+      push:
+        - meta_scope: markup.heading.markdown
+        - meta_content_scope: entity.name.section.markdown
+        - match: '[ \t]*(#*)$'
+          captures:
+            1: punctuation.definition.heading_5.markdown
+          pop: true
+        - include: inline
+  heading_6:
+    - match: '\G(#{6})(?!#)\s*(?=\S)'
+      captures:
+        1: punctuation.definition.heading_6.markdown
+      push:
+        - meta_scope: markup.heading.markdown
+        - meta_content_scope: entity.name.section.markdown
+        - match: '[ \t]*(#*)$'
+          captures:
+            1: punctuation.definition.heading_6.markdown
           pop: true
         - include: inline
   image-inline:
@@ -706,6 +783,8 @@ contexts:
   inline:
     - include: escape
     - include: ampersand
+    - include: table-bar
+    - include: map-arrow
     - include: bracket
     - include: raw
     - include: bold_italic
@@ -783,6 +862,8 @@ contexts:
               pop: true
         - include: escape
         - include: ampersand
+        - include: table-bar
+        - include: map-arrow
         - include: bracket
         - include: raw
         - include: bold_italic
@@ -952,6 +1033,8 @@ contexts:
               pop: true
         - include: escape
         - include: ampersand
+        - include: table-bar
+        - include: map-arrow
         - include: bracket
         - include: raw
         - include: bold_italic
