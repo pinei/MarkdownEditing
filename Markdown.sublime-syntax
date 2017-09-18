@@ -65,25 +65,57 @@ contexts:
         - include: block_raw
         - include: heading
         - include: separator
-    - match: '^[ ]{0,3}([*+-])(?=\s)'
+
+
+    - match: '^[ ]{0,3}([*])(?=\s)'
       captures:
-        1: punctuation.definition.list_item.markdown
+        1: punctuation.definition.list_item_info.markdown
       push:
         - meta_scope: markup.list.unnumbered.markdown
         - match: ^(?=\S)
           captures:
-            1: punctuation.definition.list_item.markdown
+            1: punctuation.definition.list_item_info.markdown
           pop: true
         - include: fenced-code-blocks
         - include: list-paragraph
+
+
+    - match: '^[ ]{0,3}([-])(?=\s)'
+      captures:
+        1: punctuation.definition.list_item_todo.markdown
+      push:
+        - meta_scope: markup.list.unnumbered.markdown
+        - match: ^(?=\S)
+          captures:
+            1: punctuation.definition.list_item_todo.markdown
+          pop: true
+        - include: fenced-code-blocks
+        - include: list-paragraph
+
+
+    - match: '^[ ]{0,3}([+])(?=\s)'
+      captures:
+        1: punctuation.definition.list_item_done.markdown
+      push:
+        - meta_scope: markup.list.unnumbered.markdown
+        - match: ^(?=\S)
+          captures:
+            1: punctuation.definition.list_item_done.markdown
+          pop: true
+        - include: fenced-code-blocks
+        - include: list-paragraph
+
+
+
+
     - match: '^[ ]{0,3}([0-9]+\.)(?=\s)'
       captures:
-        1: punctuation.definition.list_item.markdown
+        1: punctuation.definition.list_item_numbered.markdown
       push:
         - meta_scope: markup.list.numbered.markdown
         - match: ^(?=\S)
           captures:
-            1: punctuation.definition.list_item.markdown
+            1: punctuation.definition.list_item_numbered.markdown
           pop: true
         - include: fenced-code-blocks
         - include: list-paragraph
@@ -960,9 +992,18 @@ contexts:
         - match: ^\s*$
           pop: true
         - include: inline
-        - match: '\G\s*([*\-+]|[0-9]+\.)\s+'
+        - match: '\G\s*([*])\s+'
           captures:
-            1: punctuation.definition.list_item.markdown
+            1: punctuation.definition.list_item_info.markdown
+        - match: '\G\s*([\-])\s+'
+          captures:
+            1: punctuation.definition.list_item_todo.markdown
+        - match: '\G\s*([+])\s+'
+          captures:
+            1: punctuation.definition.list_item_done.markdown
+        - match: '\G\s*([0-9]+\.)\s+'
+          captures:
+            1: punctuation.definition.list_item_numbered.markdown
         - include: scope:text.html.basic
         - include: fenced-code-blocks
   raw:

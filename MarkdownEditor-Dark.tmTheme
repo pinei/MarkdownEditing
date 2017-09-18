@@ -558,6 +558,62 @@
         </dict>
         <dict>
             <key>name</key>
+            <string>Markdown: Lists (Info)</string>
+            <key>scope</key>
+            <string>
+                , markup.list.unnumbered.markdown punctuation.definition.list_item_info.markdown,
+                , markup.list.numbered.markdown punctuation.definition.list_item_info.markdown,
+            </string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c033e0</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Markdown: Lists (Todo)</string>
+            <key>scope</key>
+            <string>
+                , markup.list.unnumbered.markdown punctuation.definition.list_item_todo.markdown,
+                , markup.list.numbered.markdown punctuation.definition.list_item_todo.markdown,
+            </string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#FF0033</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Markdown: Lists (Done)</string>
+            <key>scope</key>
+            <string>
+                , markup.list.unnumbered.markdown punctuation.definition.list_item_done.markdown,
+                , markup.list.numbered.markdown punctuation.definition.list_item_done.markdown,
+            </string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#33AFFF</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Markdown: Lists (Numbered)</string>
+            <key>scope</key>
+            <string>
+                , markup.list.unnumbered.markdown punctuation.definition.list_item_numbered.markdown,
+                , markup.list.numbered.markdown punctuation.definition.list_item_numbered.markdown,
+            </string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#6D9CBE</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>name</key>
             <string>Markup: Output</string>
             <key>scope</key>
             <string>markup.output, markup.raw</string>
@@ -599,7 +655,7 @@
                 <key>fontStyle</key>
                 <string>bold italic</string>
                 <key>foreground</key>
-                <string>#aaaaaa</string>
+                <string>#eeeeee</string>
             </dict>
         </dict>
         <dict>
@@ -612,7 +668,7 @@
                 <key>fontStyle</key>
                 <string>bold</string>
                 <key>foreground</key>
-                <string>#aaaaaa</string>
+                <string>#eeeeee</string>
             </dict>
         </dict>
         <dict>
