@@ -390,6 +390,15 @@
             { "key": "selector", "operator": "not_equal", "operand": "markup.raw", "match_all": true }
         ]
     },
+    // Surround with <> on URLs, regex copied from https://mathiasbynens.be/demo/url-regex, @diegoperini (502 chars)
+    { "keys": ["<"], "command": "insert_snippet", "args": {"contents": "<${0:$SELECTION}>"}, "context":
+        [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
+            { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
+            { "key": "text", "operator": "regex_match", "operand": "(?:(?:https?|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?!10(?:\\.\\d{1,3}){3})(?!127(?:\\.\\d{1,3}){3})(?!169\\.254(?:\\.\\d{1,3}){2})(?!192\\.168(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\x{00a1}-\\x{ffff}0-9]+-?)*[a-z\\x{00a1}-\\x{ffff}0-9]+)(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}0-9]+-?)*[a-z\\x{00a1}-\\x{ffff}0-9]+)*(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}]{2,})))(?::\\d{2,5})?(?:/[^\\s]*)?", "match_all": true }
+        ]
+    },
 
     // inline image insertion
     { "keys": ["super+shift+k"], "command": "reference_new_inline_image", "context":
@@ -407,13 +416,13 @@
         ]
     },
     // run paste as link command on selected text
-    { "keys": ["ctrl+super+v"], "command": "reference_new_inline_link", "context":
+    { "keys": ["ctrl+alt+v"], "command": "reference_new_inline_link", "context":
         [
             { "key": "setting.mde.keymap_disable.reference_new_inline_link", "operator": "not_equal", "operand": true },
             { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
         ]
     },
-    { "keys": ["ctrl+super+r"], "command": "reference_new_reference", "context":
+    { "keys": ["ctrl+alt+r"], "command": "reference_new_reference", "context":
         [
             { "key": "setting.mde.keymap_disable.reference_new_reference", "operator": "not_equal", "operand": true },
             { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
@@ -654,5 +663,37 @@
             { "key": "setting.mde.keymap_disable.goto_next_heading", "operator": "not_equal", "operand": true },
             { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
         ]
+    },
+    {"keys": ["ctrl+alt+h"], "command": "open_home_page", "context":
+        [
+            { "key": "setting.mde.keymap_disable.open_home_page", "operator": "not_equal", "operand": true },
+            { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
+        ]    
+    },
+    {"keys": ["ctrl+alt+d"], "command": "open_page", "context":
+        [
+            { "key": "setting.mde.keymap_disable.open_page", "operator": "not_equal", "operand": true },
+            { "key": "selector", "operator": "equal", "operand": "meta.link.wiki.markdown", "match_all": true }
+        ]    
+    },
+    {"keys": ["ctrl+alt+d"], "command": "make_page_reference", "context":
+        [
+            { "key": "setting.mde.keymap_disable.make_page_reference", "operator": "not_equal", "operand": true },
+            { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
+            { "key": "selector", "operator": "not_equal", "operand": "meta.link.wiki.markdown", "match_all": true },
+            { "key": "selector", "operator": "not_equal", "operand": "markup.underline.link.markdown", "match_all": true }            
+        ]    
+    },
+    {"keys": ["ctrl+alt+x"], "command": "list_back_links", "context":
+        [
+            { "key": "setting.mde.keymap_disable.list_back_links", "operator": "not_equal", "operand": true },
+            { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
+        ]    
+    },
+    {"keys": ["ctrl+alt+j"], "command": "open_journal", "context":
+        [
+            { "key": "setting.mde.keymap_disable.open_journal", "operator": "not_equal", "operand": true },
+            { "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true }
+        ]    
     }
 ]
