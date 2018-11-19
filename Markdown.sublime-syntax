@@ -65,9 +65,9 @@ contexts:
         - include: block_raw
         - include: heading
         - include: separator
-
-
     - match: '^[ ]{0,3}([*])(?=\s)'
+      comment: |
+        List item (info)
       captures:
         1: punctuation.definition.list_item_info.markdown
       push:
@@ -78,9 +78,9 @@ contexts:
           pop: true
         - include: fenced-code-blocks
         - include: list-paragraph
-
-
     - match: '^[ ]{0,3}([-])(?=\s)'
+      comment: |
+        List item (todo)
       captures:
         1: punctuation.definition.list_item_todo.markdown
       push:
@@ -92,9 +92,9 @@ contexts:
         - include: fenced-code-blocks
         - include: block_quote
         - include: list-paragraph
-
-
     - match: '^[ ]{0,3}([+])(?=\s)'
+      comment: |
+        List item (done)
       captures:
         1: punctuation.definition.list_item_done.markdown
       push:
@@ -105,11 +105,9 @@ contexts:
           pop: true
         - include: fenced-code-blocks
         - include: list-paragraph
-
-
-
-
     - match: '^[ ]{0,3}([0-9]+\.)(?=\s)'
+      comment: |
+        List item (numbered)
       captures:
         1: punctuation.definition.list_item_numbered.markdown
       push:

@@ -523,21 +523,20 @@
                 <string>#11111100</string>
             </dict>
         </dict>
-
         <dict>
             <key>name</key>
             <string>Markdown: Lists</string>
             <key>scope</key>
             <string>
-                , markup.list.unnumbered.markdown,
+                markup.list.unnumbered.markdown,
                 , markup.list.unnumbered.markdown meta.paragraph.list.markdown,
                 , markup.list.numbered.markdown,
-                , markup.list.numbered.markdown meta.paragraph.list.markdown,
+                , markup.list.numbered.markdown meta.paragraph.list.markdown
             </string>
             <key>settings</key>
             <dict>
                 <key>foreground</key>
-                <string>#999999</string>
+                <string>#FF9999</string>
                 <key>background</key>
                 <string>#11111100</string>
             </dict>
@@ -546,10 +545,7 @@
             <key>name</key>
             <string>Markdown: Lists</string>
             <key>scope</key>
-            <string>
-                , markup.list.unnumbered.markdown punctuation.definition.list_item.markdown,
-                , markup.list.numbered.markdown punctuation.definition.list_item.markdown,
-            </string>
+            <string>punctuation.definition.list_item.markdown</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
@@ -562,10 +558,7 @@
             <key>name</key>
             <string>Markdown: Lists (Info)</string>
             <key>scope</key>
-            <string>
-                , markup.list.unnumbered.markdown punctuation.definition.list_item_info.markdown,
-                , markup.list.numbered.markdown punctuation.definition.list_item_info.markdown,
-            </string>
+            <string>punctuation.definition.list_item_info.markdown</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
@@ -578,10 +571,7 @@
             <key>name</key>
             <string>Markdown: Lists (Todo)</string>
             <key>scope</key>
-            <string>
-                , markup.list.unnumbered.markdown punctuation.definition.list_item_todo.markdown,
-                , markup.list.numbered.markdown punctuation.definition.list_item_todo.markdown,
-            </string>
+            <string>punctuation.definition.list_item_todo.markdown</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
@@ -594,10 +584,7 @@
             <key>name</key>
             <string>Markdown: Lists (Done)</string>
             <key>scope</key>
-            <string>
-                , markup.list.unnumbered.markdown punctuation.definition.list_item_done.markdown,
-                , markup.list.numbered.markdown punctuation.definition.list_item_done.markdown,
-            </string>
+            <string>punctuation.definition.list_item_done.markdown</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
@@ -610,10 +597,7 @@
             <key>name</key>
             <string>Markdown: Lists (Numbered)</string>
             <key>scope</key>
-            <string>
-                , markup.list.unnumbered.markdown punctuation.definition.list_item_numbered.markdown,
-                , markup.list.numbered.markdown punctuation.definition.list_item_numbered.markdown,
-            </string>
+            <string>punctuation.definition.list_item_numbered.markdown</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
