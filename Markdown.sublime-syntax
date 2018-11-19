@@ -665,7 +665,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_1.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.1.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
@@ -677,7 +677,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_2.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.2.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
@@ -689,7 +689,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_3.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.3.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
@@ -701,7 +701,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_4.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.4..markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
@@ -713,7 +713,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_5.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.5.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:
@@ -725,7 +725,7 @@ contexts:
       captures:
         1: punctuation.definition.heading_6.markdown
       push:
-        - meta_scope: markup.heading.markdown
+        - meta_scope: markup.heading.6.markdown
         - meta_content_scope: entity.name.section.markdown
         - match: '[ \t]*(#*)$'
           captures:

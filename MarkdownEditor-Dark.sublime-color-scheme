@@ -186,6 +186,33 @@
             "foreground": "#ffffff"
         },
         {
+            "name": "Markdown: Numbered List",
+            "scope": "markup.list.numbered.markdown punctuation.definition.list_item_numbered.markdown",
+            "foreground": "#6D9CBE",
+            "font_style": "bold"
+        },
+        {
+            "name": "Markdown: Lists (Todo)",
+            "scope": "markup.list.unnumbered.markdown punctuation.definition.list_item_todo.markdown",
+            "foreground": "#FF0033"  
+        },
+        {
+            "name": "Markdown: Lists (Done)",
+            "scope": "markup.list.unnumbered.markdown meta.paragraph.list.markdown punctuation.definition.list_item_done.markdown",
+            "foreground": "#33AFFF"  
+        },
+        {
+            "name": "Markdown: Lists (Info)",
+            "scope": "markup.list.unnumbered.markdown meta.paragraph.list.markdown punctuation.definition.list_item_info.markdown",
+            "foreground": "#c033e0",
+            "font_style": "bold"
+        },
+        {
+            "name": "Markdown: Table bar",
+            "scope": "punctuation.separator.table-bar.markdown",
+            "foreground": "#00ff00"
+        },
+        {
             "name": "Markup: Output",
             "scope": "markup.output, markup.raw",
             "foreground": "#808080"
@@ -198,7 +225,38 @@
         {
             "name": "Markup: Heading",
             "scope": "markup.heading",
-            "font_style": "bold"
+            "font_style": "bold",
+            "foreground": "#ffff00"
+        },
+        {
+            "name": "Markup: Heading 1",
+            "scope": "markup.heading.1 punctuation",
+            "foreground": "#ffff00"
+        },
+        {
+            "name": "Markup: Heading 2",
+            "scope": "markup.heading.2 punctuation",
+            "foreground": "#ffd000"
+        },
+        {
+            "name": "Markup: Heading 3",
+            "scope": "markup.heading.3 punctuation",
+            "foreground": "#ffb000"
+        },
+        {
+            "name": "Markup: Heading 4",
+            "scope": "markup.heading.4 punctuation",
+            "foreground": "#ffa000"
+        },
+        {
+            "name": "Markup: Heading 5",
+            "scope": "markup.heading.5 punctuation",
+            "foreground": "#ff9000"
+        },
+        {
+            "name": "Markup: Heading 6",
+            "scope": "markup.heading.6 punctuation",
+            "foreground": "#ff8000"
         },
         {
             "name": "Markup: StrongEmphasis",
