@@ -114,6 +114,10 @@
         "command": "unfold_all_sections"
     },
     {
+        "caption": "MarkdownEditing: Fold All Link URLs",
+        "command": "fold_all_link_urls"
+    },
+    {
         "caption": "MarkdownEditing: Find Next Heading (Same or higher level)",
         "command": "goto_next_heading", "args" :
         {
@@ -152,5 +156,25 @@
     {
         "caption": "MarkdownEditing: Convert inline link to reference",
         "command": "convert_inline_link_to_reference"
+    },
+    {
+        "caption": "MarkdownEditing: Open Home Page",
+        "command": "open_home_page"
+    },
+    {
+        "caption": "MarkdownEditing: Open Page",
+        "command": "open_page"
+    },
+    {
+        "caption": "MarkdownEditing: List Back Links",
+        "command": "list_back_links"
+    },
+    {
+        "caption": "MarkdownEditing: Open Journal",
+        "command": "open_journal"
+    },
+    {
+        "caption": "MarkdownEditing: Run markdownlint",
+        "command": "markdown_lint_mdl"
     }
 ]

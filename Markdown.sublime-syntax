@@ -90,6 +90,7 @@ contexts:
             1: punctuation.definition.list_item_todo.markdown
           pop: true
         - include: fenced-code-blocks
+        - include: block_quote
         - include: list-paragraph
 
 
@@ -118,8 +119,15 @@ contexts:
             1: punctuation.definition.list_item_numbered.markdown
           pop: true
         - include: fenced-code-blocks
+        - include: block_quote
         - include: list-paragraph
     - include: fenced-code-blocks
+    - match: '<!---'
+      comment: Github style comment
+      push:
+        - meta_scope: comment.block.html
+        - match: ->
+          pop: true
     - match: '^(?=<(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|noscript|form|fieldset|iframe|math|ins|del)\b[^>]*>)(?!.*?</\1>)'
       comment: Markdown formatting is disabled inside block-level tags.
       push:
@@ -212,7 +220,8 @@ contexts:
     - match: '\G[ ]{,3}(>)[ ]?'
       comment: |
         We terminate the block quote when seeing an empty line, a
-                        separator or a line with leading > characters. The latter is
+                        separator, a numbered or un-numbered list-item
+                        or a line with leading > characters. The latter is
                         to “reset” the quote level for quoted lines.
       captures:
         1: punctuation.definition.blockquote.markdown
@@ -222,12 +231,15 @@ contexts:
             (?x)^
             (?= \s*$
             | [ ]{,3}(?<marker>[-*_])([ ]{,2}\k<marker>){2,}[ \t]*+$
+            | [ ]{,3}([*+-])(?=\s)
+            | [ ]{,3}([0-9]+\.)(?=\s)
             | [ ]{,3}>
             )
           pop: true
         - match: |-
             (?x)\G
-            (?= [ ]{,3}>
+            [ ]*
+            (?= >
             )
           push:
             - match: ^
@@ -330,6 +342,7 @@ contexts:
         - include: link-inline
         - include: link-inet
         - include: link-email
+        - include: link-wiki
         - include: image-ref
         - include: link-ref
         - include: link-ref-literal
@@ -404,6 +417,7 @@ contexts:
         - include: link-inline
         - include: link-inet
         - include: link-email
+        - include: link-wiki
         - include: image-ref
         - include: link-ref
         - include: link-ref-literal
@@ -419,46 +433,34 @@ contexts:
       scope: constant.character.escape.markdown
   fenced-c:
     - match: '^(\s*[`~]{3,})\s*(c)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.c
+      embed: scope:source.c
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-csharp:
     - match: '^(\s*[`~]{3,})\s*(c(?:s|sharp|#))\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.cs
+      embed: scope:source.cs
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-c++:
     - match: '^(\s*[`~]{3,})\s*(c\+\+|cpp)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.c++
+      embed: scope:source.c++
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-clojure:
     - match: '^(\s*[`~]{3,})\s*(clojure)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.clojure
+      embed: scope:source.clojure
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-go:
     - match: '^(\s*[`~]{3,})\s*(go|golang)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.go
+      embed: scope:source.go
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-kotlin:
     - match: '^(\s*[`~]{3,})\s*(kt|kotlin)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.Kotlin
+      embed: scope:source.Kotlin
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-code-blocks:
     - include: fenced-html
     - include: fenced-xml
@@ -480,6 +482,7 @@ contexts:
     - include: fenced-obj-c
     - include: fenced-coffee
     - include: fenced-js
+    - include: fenced-json
     - include: fenced-ts
     - include: fenced-tsx
     - include: fenced-ruby
@@ -493,182 +496,149 @@ contexts:
     - include: fenced-kotlin
     - include: fenced-ocaml
     - include: fenced-reason
+    - include: fenced-haskell
+    - include: fenced-rust
     - include: fenced-undefined
   fenced-coffee:
     - match: '^(\s*[`~]{3,})\s*(coffee|cjsx)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.coffee
+      embed: scope:source.coffee
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-css:
     - match: '^(\s*[`~]{3,})\s*(css)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.css
+      embed: scope:source.css
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-diff:
     - match: '^(\s*[`~]{3,})\s*(diff|patch)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.diff
+      embed: scope:source.diff
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-html:
     - match: '^(\s*[`~]{3,})\s*(html|html5)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:text.html.basic
+      embed: scope:text.html.basic
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-java:
     - match: '^(\s*[`~]{3,})\s*(java)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.java
+      embed: scope:source.java
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-js:
-    - match: '^(\s*[`~]{3,})\s*(js|jsx|json|javascript)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.js
+    - match: '^(\s*[`~]{3,})\s*(js|jsx|javascript)\s*$'
+      embed: scope:source.js
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
+  fenced-json:
+    - match: '^(\s*[`~]{3,})\s*(json)\s*$'
+      embed: scope:source.json
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-less:
     - match: '^(\s*[`~]{3,})\s*(less)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.less
+      embed: scope:source.less
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-lisp:
     - match: '^(\s*[`~]{3,})\s*(lisp)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.lisp
+      embed: scope:source.lisp
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-lua:
     - match: '^(\s*[`~]{3,})\s*(lua)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.lua
+      embed: scope:source.lua
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-ocaml:
     - match: '^(\s*[`~]{3,})\s*(ocaml)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.ocaml
+      embed: scope:source.ocaml
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-obj-c:
     - match: '^(\s*[`~]{3,})\s*(obj(ective-)?c)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.objc
+      embed: scope:source.objc
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-perl:
     - match: '^(\s*[`~]{3,})\s*(perl)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.perl
+      embed: scope:source.perl
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-php:
     - match: '^(\s*[`~]{3,})\s*(php)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.php
+      embed: scope:source.php
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-python:
     - match: '^(\s*[`~]{3,})\s*(py|python)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.python
+      embed: scope:source.python
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-reason:
     - match: '^(\s*[`~]{3,})\s*(re|reason)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.reason
+      embed: scope:source.reason
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-ruby:
     - match: '^(\s*[`~]{3,})\s*(ruby)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.ruby
+      embed: scope:source.ruby
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-sass:
     - match: '^(\s*[`~]{3,})\s*(sass)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.sass
+      embed: scope:source.sass
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-scala:
     - match: '^(\s*[`~]{3,})\s*(scala)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.scala
+      embed: scope:source.scala
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-scheme:
     - match: '^(\s*[`~]{3,})\s*(scheme)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.scheme
+      embed: scope:source.scheme
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-scss:
     - match: '^(\s*[`~]{3,})\s*(scss)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.scss
+      embed: scope:source.scss
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-shell:
     - match: '^(\s*[`~]{3,})\s*(sh|shell|bash)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.shell
+      embed: scope:source.shell
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-sql:
     - match: '^(\s*[`~]{3,})\s*(sql)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.sql
+      embed: scope:source.sql
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-swift:
     - match: '^(\s*[`~]{3,})\s*(swift)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.swift
+      embed: scope:source.swift
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-ts:
     - match: '^(\s*[`~]{3,})\s*(ts|typescript)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.ts
+      embed: scope:source.ts
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-tsx:
     - match: '^(\s*[`~]{3,})\s*(tsx)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.tsx
+      embed: scope:source.tsx
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
+  fenced-haskell:
+    - match: '^(\s*[`~]{3,})\s*(haskell|hs)\s*$'
+      embed: scope:source.haskell
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
+  fenced-rust:
+    - match: '^(\s*[`~]{3,})\s*(rust)\s*$'
+      embed: scope:source.rust
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-undefined:
     - match: '^(\s*[`~]{3,}).*$'
       push:
@@ -677,18 +647,14 @@ contexts:
           pop: true
   fenced-xml:
     - match: '^(\s*[`~]{3,})\s*(xml)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:text.xml
+      embed: scope:text.xml
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   fenced-yaml:
     - match: '^(\s*[`~]{3,})\s*(yaml)\s*$'
-      push:
-        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
-        - match: ^(\1)\n
-          pop: true
-        - include: scope:source.yaml
+      embed: scope:source.yaml
+      embed_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+      escape: ^(\1)\n
   heading:
     - include: heading_1
     - include: heading_2
@@ -828,6 +794,7 @@ contexts:
     - include: link-inline
     - include: link-inet
     - include: link-email
+    - include: link-wiki
     - include: image-ref
     - include: link-ref
     - include: link-ref-literal
@@ -905,6 +872,7 @@ contexts:
         - include: link-inline
         - include: link-inet
         - include: link-email
+        - include: link-wiki
         - include: image-ref
         - include: link-ref
         - include: link-ref-literal
@@ -919,6 +887,13 @@ contexts:
         1: punctuation.definition.link.markdown
         2: markup.underline.link.markdown
         4: punctuation.definition.link.markdown
+  link-wiki:
+    - match: '(\[\[)([a-zA-Z0-9.]+)(\]\])'
+      scope: meta.link.wiki.markdown
+      captures:
+        1: punctuation.definition.string.begin.markdown
+        2: markup.underline.link.markdown
+        3: punctuation.definition.string.end.markdown
   link-footnote:
     - match: '(\[)(\^[^\]]*+)(\])'
       scope: meta.link.reference.markdown
@@ -1006,6 +981,7 @@ contexts:
             1: punctuation.definition.list_item_numbered.markdown
         - include: scope:text.html.basic
         - include: fenced-code-blocks
+        - include: block_quote
   raw:
     - include: latex-display
     - match: '(`+)((?:[^`]|(?!(?<!`)\1(?!`))`)*+)(\1)'
