@@ -213,7 +213,7 @@ contexts:
       scope: punctuation.separator.table-bar.markdown
   map-arrow:
     - match: '([→←])'
-      scope: punctuation.separator.map-arrow.markdown 
+      scope: punctuation.separator.map-arrow.markdown
   block_quote:
     - match: '\G[ ]{,3}(>)[ ]?'
       comment: |

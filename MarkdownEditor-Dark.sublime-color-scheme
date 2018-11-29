@@ -198,18 +198,18 @@
         },
         {
             "name": "Markdown: Lists (Done)",
-            "scope": "markup.list.unnumbered.markdown meta.paragraph.list.markdown punctuation.definition.list_item_done.markdown",
+            "scope": "markup.list.unnumbered.markdown punctuation.definition.list_item_done.markdown",
             "foreground": "#33AFFF"  
         },
         {
             "name": "Markdown: Lists (Info)",
-            "scope": "markup.list.unnumbered.markdown meta.paragraph.list.markdown punctuation.definition.list_item_info.markdown",
+            "scope": "markup.list.unnumbered.markdown punctuation.definition.list_item_info.markdown",
             "foreground": "#c033e0",
             "font_style": "bold"
         },
         {
-            "name": "Markdown: Table bar",
-            "scope": "punctuation.separator.table-bar.markdown",
+            "name": "Markdown: Table bar and Arrow",
+            "scope": "punctuation.separator.table-bar.markdown, punctuation.separator.map-arrow.markdown",
             "foreground": "#00ff00"
         },
         {
